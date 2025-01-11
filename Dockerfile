@@ -23,4 +23,4 @@ ENV PYTHONPATH=/app
 
 # デフォルトのコマンドを指定
 # CMD ["python", "app.py"]
-CMD ["./start.sh"]
+CMD ["sh", "-c", "gunicorn main:app --bind 0.0.0.0:${PORT}"]

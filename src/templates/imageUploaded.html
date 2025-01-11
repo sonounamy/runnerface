@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            
+        </head>
+        <body>
+            <!-- <p>
+                元画像
+                <img src="{{img_url}}" style="max-width: 50%; height: auto">
+            </p> -->
+            <p>
+                加工後画像
+                <br />
+                <p>
+                <img src="{{ url_for('static', filename=img_url) }}" style="max-width: 50%; height: auto">
+                <br />
+                {{emotions}}
+                </p>
+            </p>
+        </body>
+    </html>

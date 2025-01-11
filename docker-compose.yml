@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    container_name: face_detect_app
+    volumes:
+      - .:/app
+    ports:
+      - "5000:5000"  # 必要に応じてポートを公開
+    environment:
+      - PYTHONPATH=/app

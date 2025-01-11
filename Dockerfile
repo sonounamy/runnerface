@@ -22,4 +22,5 @@ COPY . .
 ENV PYTHONPATH=/app
 
 # デフォルトのコマンドを指定
-CMD ["python", "app.py"]
+# CMD ["python", "app.py"]
+CMD ["gunicorn", "main:app", "--bind", "0.0.0.0:$PORT"]

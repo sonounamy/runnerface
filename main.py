@@ -55,6 +55,6 @@ def process_uploaded_file():
     return render_template('imageUploaded.html', img_url = img_url, emotions = emotions)
 
 
-if __name__ == '__app__':
+if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))  # 環境変数PORTがない場合はデフォルト5000
     app.run(host="0.0.0.0", port=port)

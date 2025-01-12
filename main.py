@@ -1,8 +1,16 @@
 import os
 
-from flask import Flask, flash, render_template, request, redirect, url_for, send_from_directory
+from flask import (
+    Flask,
+    render_template,
+    request,
+    redirect,
+    url_for,
+    redirect
+)
 
 from src.analyze_faces import analyze_face
+from src.emotions import translate_emotions
 
 app = Flask(__name__, template_folder='src/templates')
 
@@ -29,10 +37,14 @@ def login():
     password = request.form['password']
 
     if username in users and users[username] == password:
-        return render_template('imageUpload.html')
+        return redirect(url_for('after_login'))
     else:
         return render_template('loginFail.html')
-    
+
+@app.route('/top', methods=['GET'])
+def after_login():
+    return render_template('imageUpload.html')
+
 # ファイルを受け取る方法の指定
 @app.route('/upload-image', methods=['GET', 'POST'])
 def process_uploaded_file():
@@ -48,8 +60,10 @@ def process_uploaded_file():
     file.save(input_path)
 
     output_path = os.path.join(PROCESSED_FOLDER, file.filename)
-    image, emotions = analyze_face(input_path, output_path)
+    image, emotion_raw_list = analyze_face(input_path, output_path)
     image.save(output_path)
+
+    emotions = translate_emotions(emotion_raw_list)
 
     img_url = f"processed_images/{file.filename}"
     return render_template('imageUploaded.html', img_url = img_url, emotions = emotions)

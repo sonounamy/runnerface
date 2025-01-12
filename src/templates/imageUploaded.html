@@ -15,8 +15,15 @@
                 <p>
                 <img src="{{ url_for('static', filename=img_url) }}" style="max-width: 50%; height: auto">
                 <br />
-                {{emotions}}
+                {% for emotion in emotions %}
+                    <p>人物{{loop.index}}</p>
+                    <ul>
+                        {% for emotion, confidence in emotion %}
+                            <li>{{ emotion }}：{{ confidence }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
                 </p>
-            </p>
+                <button onclick="window.location.href='/top';">トップに戻る</button>            </p>
         </body>
     </html>

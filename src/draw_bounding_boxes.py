@@ -54,7 +54,7 @@ def _draw(
 
 
 def _draw_caption(idx, draw, font, left, top, text_ascend):
-    label = f"選手{idx + 1}"
+    label = f"人物{idx + 1}"
     text_bbox = draw.textbbox((0, 0), label, font=font)
     text_width = text_bbox[2] - text_bbox[0]
     text_height = text_bbox[3] - text_bbox[1]
